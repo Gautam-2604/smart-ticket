@@ -12,7 +12,6 @@ export const onTicketCreated = inngest.createFunction(
     try {
       const { ticketId } = event.data;
 
-      //fetch ticket from DB
       const ticket = await step.run("fetch-ticket", async () => {
         const ticketObject = await Ticket.findById(ticketId);
         if (!ticket) {
@@ -64,7 +63,7 @@ export const onTicketCreated = inngest.createFunction(
         return user;
       });
 
-      await setp.run("send-email-notification", async () => {
+      await step.run("send-email-notification", async () => {
         if (moderator) {
           const finalTicket = await Ticket.findById(ticket._id);
           await sendMail(

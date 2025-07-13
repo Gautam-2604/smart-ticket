@@ -14,6 +14,7 @@ export const createTicket = async (req, res) => {
       description,
       createdBy: req.user._id.toString(),
     });
+    
 
     await inngest.send({
       name: "ticket/created",
